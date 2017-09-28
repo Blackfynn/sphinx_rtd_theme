@@ -42,17 +42,22 @@
     margin-bottom: 0
   li
     &.divide-top
-      border-top: solid 1px hsl(0, 0%, 25%)
+      border-top: 0px
+      //solid 1px hsl(0, 0%, 25%)
     &.divide-bottom
-      border-bottom: solid 1px hsl(0, 0%, 25%)
+      border-bottom: 0px
+      //solid 1px hsl(0, 0%, 25%)
     &.current
-      background: darken($menu-vertical-background-color, 10%)
+      background: $menu-vertical-background-color
+      //darken($menu-vertical-background-color, 10%)
       a
         color: $menu-link-medium
-        border-right: solid 1px darken($menu-vertical-background-color, 20%)
+        border-right: solid 1px $menu-vertical-background-color
         padding: $gutter / 4 $gutter * 1.5
         &:hover
-          background: darken($menu-vertical-background-color, 15%)
+          background: $menu-vertical-background-color
+          font-weight: bold
+          //darken($menu-vertical-background-color, 15%)
     code
       border: none
       background: inherit
@@ -68,7 +73,8 @@
       @extend .fa-plus-square-o
       font-size: .8em
       line-height: 1.6em
-      color: darken($menu-link-medium, 20%)
+      color: $menu-vertical-background-color
+      //darken($menu-link-medium, 20%)
 
   // On state for the first level
   li.on a, li.current > a
@@ -78,8 +84,6 @@
     position: relative
     background: $menu-vertical-background-color
     border: none
-    border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
-    border-top: solid 1px darken($menu-vertical-background-color, 20%)
     padding-left: $gutter -4px
     +font-smooth
     &:hover
@@ -92,7 +96,6 @@
       display: block
       font-size: .8em
       line-height: 1.6em
-      color: darken($menu-link-medium, 30%)
 
   // This is the on state for pages beyond second level
   li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3
@@ -103,11 +106,9 @@
   li.toctree-l2
     &.current
       > a
-        background: darken($menu-vertical-background-color, 20%)
         padding: $gutter / 4 $gutter * 1.5
       li.toctree-l3 > a
         display: block
-        background: darken($menu-vertical-background-color, 20%)
         padding: $gutter / 4 $gutter * 2.5
     a:hover span.toctree-expand
       color: $menu-link-medium
@@ -117,11 +118,9 @@
     font-size: .9em
     &.current
       > a
-        background: darken($menu-vertical-background-color, 25%)
         padding: $gutter / 4 $gutter * 2.5
       li.toctree-l4 > a
         display: block
-        background: darken($menu-vertical-background-color, 25%)
         padding: $gutter / 4 $gutter * 3.5
         border-top: none
         border-bottom: none
@@ -153,7 +152,7 @@
     font-size: 90%
     color: $menu-link-light
     &:hover
-      background-color: lighten($menu-background-color, 10%)
+      //background-color: lighten($menu-background-color, 10%)
       cursor: pointer
       span.toctree-expand
         color: $menu-link-light
@@ -178,7 +177,7 @@
   margin-bottom: $gutter / 2
   input[type=text]
     width: 100%
-    border-radius: 50px
+    border-radius: 0px
     padding: 6px 12px
     border-color: darken($link-color, 5%)
   img
@@ -188,7 +187,7 @@
     width: 45px
     background-color: $menu-logo-color
     padding: 5px
-    border-radius: 100%
+    border-radius: 0px
   > a, .wy-dropdown > a
     color: $nav-search-color
     font-size: 100%
@@ -261,6 +260,7 @@
   top: 0
   bottom: 0
   left: 0
+  border-right: 2px solid #dadada
   padding-bottom: 2em
   width: $nav-desktop-width
   overflow-x: hidden
@@ -296,7 +296,7 @@
     width: 45px
     background-color: $menu-logo-color
     padding: 5px
-    border-radius: 100%
+    border-radius: 0px
   i
     font-size: 30px
     float: left
@@ -331,7 +331,8 @@ footer
     padding: 0px
     font-family: $code-font-family
     font-size: 1em
-    background: none
+    background: $blue
+    //none
     border: none
     color: $footer-color
 

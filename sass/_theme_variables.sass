@@ -2,15 +2,44 @@
 // that are set in wyrm_core/wy_variables.sass. You'll find wyrm in bower_components if you're looking
 // for a reference.
 
-$blue:                                #2860FF
+$blue:                                #2760FF
 $purple:                              #071540
 $cobalt:                              #071540
 
+$gray-darker:                         $gray
+//#222 !default
+$gray-dark:                           $gray
+//#333 !default
+$gray-light:                          $gray
+//#999 !default
+$gray-lighter:                        $gray
+//#ccc !default
+
+$background-color:                    $white
+$section-background-color:            $white
+$dropdown-color:                      $section-background-color
+$dropdown-border-color:               $section-background-color
+
+$base-font-size:                      16px
+// !default
+
+// Menu colors
+$menu-background-color:               #F5F5F5
+$menu-vertical-background-color:      $menu-background-color
+
+$table-background-color:              $menu-background-color
+$table-border-color:                  #dadada
+$table-stripe-color:                  $menu-background-color
+$table-head-background-color:         $table-border-color
+$table-bg-hover-color:                $menu-background-color
+
 $link-color:                          $blue
-$link-color-visited:                  $purple
-$link-color-hover:                    lighten($link-color, 6%) !default
+$link-color-visited:                  lighten($link-color, 10%)
+// !default
+$link-color-hover:                    darken($link-color, 10%)
+// !default
 $link-color-alt:                      $blue
-$menu-logo-color:                     $link-color
+$menu-logo-color:                     $menu-background-color
 //hsl(33, 100%, 51%)
 
 $font-awesome-dir:                    "../fonts/"
@@ -20,7 +49,7 @@ $mathjax-color:                       $text-color
 $headerlink-color:                    $text-color
 
 // Code colors
-$text-viewcode-color:                 $green
+$text-viewcode-color:                 $blue
 $text-codexref-color:                 $text-color
 
 // Definition list colors
@@ -33,30 +62,37 @@ $guilabel-color:                      $blue
 // Footer colors
 $footer-color:                        $text-medium
 
-// Menu colors
-$menu-vertical-background-color:      $section-background-color
 
 // Menu text colors
 $menu-color:                          $gray
-$menu-dark:                           lighten($menu-color,10%) !default
-$menu-medium:                         lighten($menu-color,25%) !default
-$menu-light:                          lighten($menu-color,45%) !default
-$menu-lighter:                        lighten($menu-color,60%) !default
+$menu-dark:                           $gray
+//lighten($menu-color,10%) !default
+$menu-medium:                         $gray
+//lighten($menu-color,25%) !default
+$menu-light:                          $gray
+//lighten($menu-color,45%) !default
+$menu-lighter:                        $gray
+//lighten($menu-color,60%) !default
 
 // Menu link colors
 $menu-link-color:                     $text-color
-$menu-link-dark:                      $text-dark
-$menu-link-medium:                    $text-medium
-$menu-link-light:                     $text-light
-$menu-link-active:                    $white
+$menu-link-dark:                      $text-color
+//$text-dark
+$menu-link-medium:                    $text-color
+//$text-medium
+$menu-link-light:                     $text-color
+//$text-light
+$menu-link-active:                    $text-color
+//$white
 
 // Navigation colors
 $nav-background-color:                $menu-background-color
-$nav-search-background-color:         $blue
+$nav-search-background-color:         $menu-background-color
 $nav-search-color:                    $section-background-color
 $nav-link-color:                      $blue
 $nav-link-color-visited:              $purple
-$nav-link-color-hover:                lighten($nav-link-color, 6%) !default
+$nav-link-color-hover:                $nav-link-color 
+//lighten($nav-link-color, 6%) !default
 $nav-link-color-alt:                  hsl(33, 100%, 51%)
 
 // Sidebar colors
@@ -67,7 +103,7 @@ $sidebar-title-background-color:      $table-border-color
 // Sphinx highlight color
 $highlight-color:                     $yellow
 
-$base-font-family:                    "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif
+$base-font-family:                    "SharpSansDispNo1", "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif
 $custom-font-family:                  "SharpSansDispNo1", "Roboto Slab", "ff-tisa-web-pro", "Georgia", Arial, sans-serif
-$custom-font-family2:                 Georgia, serif
+$custom-font-family2:                 "SharpSansDispNo1", Georgia, serif
 $code-font-family:                    Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace
