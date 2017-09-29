@@ -233,20 +233,22 @@
     dt
       display: table
       margin: $base-line-height / 4 0
-      font-size: 90%
+      font-size: 110%
       line-height: normal
-      background: lighten($class-color, 50%)
+      background: lighten($class-color, 60%)
       color: $class-color
-      border-top: solid 3px lighten($class-color, 20%)
-      padding: $base-line-height / 4
+      //border-top: solid 3px $gray
+      border-left: solid 4px $class-color
+      padding: $base-line-height / 2
       position: relative
       &:before
         color: lighten($class-color, 20%)
       .headerlink
         color: $text-color
-        font-size: 100% !important
+        font-size: 90% !important
     // And this would be the .. method::
     dl dt
+      font-size: 90%
       margin-bottom: $base-line-height / 4
       border: none
       border-left: solid 3px hsl(0,0%,80%)
@@ -254,7 +256,7 @@
       color: $method-color
       .headerlink
         color: $headerlink-color
-        font-size: 100% !important
+        font-size: 80% !important
     dt:first-child
       margin-top: 0
     // Since dts get the callout style, we treat this less as callouts.
