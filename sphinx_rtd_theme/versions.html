@@ -25,7 +25,6 @@
   }
 
   // Get version info from PyPi
-  var url = 'https://pypi.org/pypi/blackfynn/json';
   var request = new XMLHttpRequest();
   request.open('GET', '{{ pypi_url }}');
   request.responseType = 'json';
