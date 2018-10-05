@@ -7,34 +7,37 @@
   </span>
   <div class="rst-other-versions">
     <dl>
-      <dt id="blackfynn-versions-list">{{ _('Versions') }}</dt>
+      <dt id="blackfynn-version-list">{{ _('Versions') }}</dt>
     </dl>
    </div>
 </div>
 
 <script type="text/javascript">
+
+  // Add a link to the given version of the documentation
   function addVersionLink(version) {
-    var versions = document.querySelector("#blackfynn-versions-list");
+    var versions = document.querySelector("#blackfynn-version-list");
     var entry = document.createElement('dd');
     var link = document.createElement('a')
     link.textContent = version;
-    link.href = 'http://docs.blackfynn.io/python/' + version;
+    link.href = '{{ root_url }}' + version;
     entry.appendChild(link);
     versions.appendChild(entry);
   }
 
+  // Get version info from PyPi
   var url = 'https://pypi.org/pypi/blackfynn/json';
   var request = new XMLHttpRequest();
-  request.open('GET', url);
+  request.open('GET', '{{ pypi_url }}');
   request.responseType = 'json';
   request.send();
 
   request.onload = function() {
-    var releases = request.response.releases;
     addVersionLink('latest');
-    Object.keys(releases).filter(function(v) {return v > '2.3.1'}).sort().reverse().forEach(function(versionNumber) {
-      if (releases.hasOwnProperty(versionNumber)) {
-        addVersionLink(versionNumber)
+    Object.keys(request.response.releases).sort().reverse().forEach(function(version) {
+      // versions older than 2.3.1 don't have documentation
+      if (version > '2.3.1') {
+        addVersionLink(version)
       }
     });
   }
