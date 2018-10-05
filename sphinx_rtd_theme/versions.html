@@ -7,14 +7,14 @@
   </span>
   <div class="rst-other-versions">
     <dl>
-      <dt id="bf-versions-list">{{ _('Versions') }}</dt>
+      <dt id="blackfynn-versions-list">{{ _('Versions') }}</dt>
     </dl>
    </div>
 </div>
 
 <script type="text/javascript">
   function addVersionLink(version) {
-    var versions = document.querySelector("#bf-versions-list");
+    var versions = document.querySelector("#blackfynn-versions-list");
     var entry = document.createElement('dd');
     var link = document.createElement('a')
     link.textContent = version;
@@ -32,7 +32,7 @@
   request.onload = function() {
     var releases = request.response.releases;
     addVersionLink('latest');
-    Object.keys(releases).sort().reverse().forEach(function(versionNumber) {
+    Object.keys(releases).filter(function(v) {return v > '2.3.1'}).sort().reverse().forEach(function(versionNumber) {
       if (releases.hasOwnProperty(versionNumber)) {
         addVersionLink(versionNumber)
       }
