@@ -1,11 +1,8 @@
 .rst-versions
-  border-right: 2px solid #dadada
   position: fixed
   bottom: 0
   left: 0
   width: $nav-desktop-width
-  color: $section-background-color
-  background: darken($menu-background-color, 8%)
   font-family: $base-font-family
   text-align: right
   z-index: $z-index-tray
@@ -17,7 +14,6 @@
   .rst-current-version
     padding: $base-line-height / 2
     background-color: #2760FF
-    border-right: solid 2px #2760ff
     display: block
     text-align: right
     font-size: 90%
@@ -42,7 +38,7 @@
     overflow-x: hidden
     overflow-y: auto
     max-height: 400px
-    background: #eee
+    background: #071540
     font-size: 90%
     padding: $base-line-height / 2
     color: $text-medium
@@ -58,9 +54,11 @@
       display: block
       margin: 0
       a
-        display: inline-block
+        display: block
         padding: $base-line-height / 4
-        color: #404040
+        color: #ccc
+        &:hover
+          color: #fff
   &.rst-badge
     width: auto
     bottom: 20px

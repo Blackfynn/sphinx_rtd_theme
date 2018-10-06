@@ -99,13 +99,10 @@ ul.fas li .fa-large:before {
 }
 
 .rst-versions {
-  border-right: 2px solid #dadada;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 300px;
-  color: #fff;
-  background: #e1e1e1;
   font-family: "SharpSansDispNo1", "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
   text-align: right;
   z-index: 400;
@@ -120,7 +117,6 @@ ul.fas li .fa-large:before {
 .rst-versions .rst-current-version {
   padding: 12px;
   background-color: #2760FF;
-  border-right: solid 2px #2760ff;
   display: block;
   text-align: right;
   font-size: 90%;
@@ -159,7 +155,7 @@ ul.fas li .fa-large:before {
   overflow-x: hidden;
   overflow-y: auto;
   max-height: 400px;
-  background: #eee;
+  background: #071540;
   font-size: 90%;
   padding: 12px;
   color: gray;
@@ -178,9 +174,12 @@ ul.fas li .fa-large:before {
   margin: 0;
 }
 .rst-versions .rst-other-versions dd a {
-  display: inline-block;
+  display: block;
   padding: 6px;
-  color: #404040;
+  color: #ccc;
+}
+.rst-versions .rst-other-versions dd a:hover {
+  color: #fff;
 }
 .rst-versions.rst-badge {
   width: auto;

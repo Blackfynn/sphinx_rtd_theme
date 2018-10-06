@@ -24,6 +24,19 @@
     fragment.appendChild(entry);
   }
   
+  function displayReleases(fragment, json) {
+    // add link to latest
+    addVersionLink(fragment, 'latest');
+    
+    var releases = json && json.releases ? Object.keys(json.releases) : []
+    releases.sort().reverse().forEach(function(version) {
+      // versions older than 2.3.1 don't have documentation
+      if (version > '2.3.1') {
+        addVersionLink(fragment, version);
+      }
+    });
+  }
+
   function returnJSON(response) {
     return response.json();
   }
@@ -31,18 +44,13 @@
   function handleSuccess(json) {
     // create a document fragment to build up dom elements in memory
     var fragment = document.createDocumentFragment();
-    // add link to latest
-    addVersionLink(fragment, 'latest');
-    // sort releases and create links
-    Object.keys(json.releases).sort().reverse().forEach(function(version) {
-      // versions older than 2.3.1 don't have documentation
-      if (version > '2.3.1') {
-        addVersionLink(fragment, version);
-      }
-    });
+    // sort and display release version links
+    displayReleases(fragment, json)
     // append fragment to dom
     var versions = document.querySelector("#blackfynn-version-list");
-    versions.appendChild(fragment);
+    if (versions) {
+      versions.appendChild(fragment);
+    }
   }
 
   // Get version info from PyPi
