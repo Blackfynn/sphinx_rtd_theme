@@ -1,42 +1,60 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
-    <span class="fa fa-book"> </span>
+    <span class="fa fa-book"></span>
     v: {{ version }}
     <span class="fa fa-caret-down"></span>
   </span>
   <div class="rst-other-versions">
     <dl>
-      <dt id="blackfynn-version-list">{{ _('Versions') }}</dt>
+      <dt id="blackfynn-version-list"></dt>
     </dl>
    </div>
 </div>
 
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script type="text/javascript">
 
   // Add a link to the given version of the documentation
-  function addVersionLink(version) {
-    var versions = document.querySelector("#blackfynn-version-list");
+  function addVersionLink(fragment, version) {
     var entry = document.createElement('dd');
     var link = document.createElement('a')
     link.textContent = version;
     link.href = '{{ root_url }}' + version;
     entry.appendChild(link);
-    versions.appendChild(entry);
+    fragment.appendChild(entry);
   }
-
-  // Get version info from PyPi
-  var request = new XMLHttpRequest();
-  request.open('GET', '{{ pypi_url }}');
-  request.responseType = 'json';
-  request.send();
-
-  request.onload = function() {
-    addVersionLink('latest');
-    Object.keys(request.response.releases).sort().reverse().forEach(function(version) {
+  
+  function displayReleases(fragment, json) {
+    // add link to latest
+    addVersionLink(fragment, 'latest');
+    
+    var releases = json && json.releases ? Object.keys(json.releases) : []
+    releases.sort().reverse().forEach(function(version) {
       // versions older than 2.3.1 don't have documentation
       if (version > '2.3.1') {
-        addVersionLink(version)
+        addVersionLink(fragment, version);
       }
     });
   }
+
+  function returnJSON(response) {
+    return response.json();
+  }
+
+  function handleSuccess(json) {
+    // create a document fragment to build up dom elements in memory
+    var fragment = document.createDocumentFragment();
+    // sort and display release version links
+    displayReleases(fragment, json)
+    // append fragment to dom
+    var versions = document.querySelector("#blackfynn-version-list");
+    if (versions) {
+      versions.appendChild(fragment);
+    }
+  }
+
+  // Get version info from PyPi
+  fetch('https://pypi.org/pypi/blackfynn/json')
+    .then(returnJSON)
+    .then(handleSuccess);
 </script>
