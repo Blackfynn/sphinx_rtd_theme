@@ -13,12 +13,6 @@
 Blackfynn Read the Docs Sphinx Theme
 **************************
 
-.. note::
-
-   Be sure to use ``grunt build`` (not plain `grunt`) when building the theme.
-   Otherwise there are issues with unicode charsets and Font Awesome
-   compatibility.
-
 .. contents::
 
 View a working demo_ over on readthedocs.org_.
