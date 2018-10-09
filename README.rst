@@ -10,10 +10,16 @@
 .. _hidden: http://sphinx-doc.org/markup/toctree.html
 
 **************************
-Read the Docs Sphinx Theme
+Blackfynn Read the Docs Sphinx Theme
 **************************
 
-.. contents:: 
+.. note::
+
+   Be sure to use ``grunt build`` (not plain `grunt`) when building the theme.
+   Otherwise there are issues with unicode charsets and Font Awesome
+   compatibility.
+
+.. contents::
 
 View a working demo_ over on readthedocs.org_.
 
@@ -225,7 +231,7 @@ Set up your environment
 #. Install sphinx_ into a virtual environment.
 
    .. code:: bash
-   
+
        pip install sphinx sphinxcontrib-httpdomain
 
 #. Install sass.
