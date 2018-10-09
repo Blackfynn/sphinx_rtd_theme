@@ -1,37 +1,60 @@
-{% if READTHEDOCS %}
-{# Add rst-badge after rst-versions for small badge style. #}
-  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      <span class="fa fa-book"> Read the Docs</span>
-      v: {{ current_version }}
-      <span class="fa fa-caret-down"></span>
-    </span>
-    <div class="rst-other-versions">
-      <dl>
-        <dt>{{ _('Versions') }}</dt>
-        {% for slug, url in versions %}
-          <dd><a href="{{ url }}">{{ slug }}</a></dd>
-        {% endfor %}
-      </dl>
-      <dl>
-        <dt>{{ _('Downloads') }}</dt>
-        {% for type, url in downloads %}
-          <dd><a href="{{ url }}">{{ type }}</a></dd>
-        {% endfor %}
-      </dl>
-      <dl>
-        <dt>{{ _('On Read the Docs') }}</dt>
-          <dd>
-            <a href="//{{ PRODUCTION_DOMAIN }}/projects/{{ slug }}/?fromdocs={{ slug }}">{{ _('Project Home') }}</a>
-          </dd>
-          <dd>
-            <a href="//{{ PRODUCTION_DOMAIN }}/builds/{{ slug }}/?fromdocs={{ slug }}">{{ _('Builds') }}</a>
-          </dd>
-      </dl>
-      <hr/>
-      {% trans %}Free document hosting provided by <a href="http://www.readthedocs.org">Read the Docs</a>.{% endtrans %}
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"></span>
+    v: {{ version }}
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt id="blackfynn-version-list"></dt>
+    </dl>
+   </div>
+</div>
 
-    </div>
-  </div>
-{% endif %}
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script type="text/javascript">
 
+  // Add a link to the given version of the documentation
+  function addVersionLink(fragment, version) {
+    var entry = document.createElement('dd');
+    var link = document.createElement('a')
+    link.textContent = version;
+    link.href = '{{ root_url }}' + version;
+    entry.appendChild(link);
+    fragment.appendChild(entry);
+  }
+  
+  function displayReleases(fragment, json) {
+    // add link to latest
+    addVersionLink(fragment, 'latest');
+    
+    var releases = json && json.releases ? Object.keys(json.releases) : []
+    releases.sort().reverse().forEach(function(version) {
+      // versions older than 2.3.1 don't have documentation
+      if (version > '2.3.1') {
+        addVersionLink(fragment, version);
+      }
+    });
+  }
+
+  function returnJSON(response) {
+    return response.json();
+  }
+
+  function handleSuccess(json) {
+    // create a document fragment to build up dom elements in memory
+    var fragment = document.createDocumentFragment();
+    // sort and display release version links
+    displayReleases(fragment, json)
+    // append fragment to dom
+    var versions = document.querySelector("#blackfynn-version-list");
+    if (versions) {
+      versions.appendChild(fragment);
+    }
+  }
+
+  // Get version info from PyPi
+  fetch('https://pypi.org/pypi/blackfynn/json')
+    .then(returnJSON)
+    .then(handleSuccess);
+</script>
