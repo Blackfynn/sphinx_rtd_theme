@@ -15,24 +15,39 @@
 <script type="text/javascript">
 
   // Add a link to the given version of the documentation
-  function addVersionLink(fragment, version) {
+  function addVersionLink(fragment, baseUrl, version) {
     var entry = document.createElement('dd');
     var link = document.createElement('a')
     link.textContent = version;
-    link.href = '{{ root_url }}' + version;
+    link.href = baseUrl + version + '/index.html';
     entry.appendChild(link);
     fragment.appendChild(entry);
   }
-  
+
   function displayReleases(fragment, json) {
-    // add link to latest
-    addVersionLink(fragment, 'latest');
-    
+
+    // get docs URL from PyPi project_urls field, if it exists
+    var baseUrl = json &&
+        json.info &&
+        json.info.project_urls &&
+        json.info.project_urls.Documentation;
+
+    // default, if not found
+    if (!baseUrl) {
+      baseUrl = '/python/'
+    }
+    if (baseUrl[baseUrl.length - 1] != '/') {
+      baseUrl += '/';
+    }
+
+    // add link to latest version
+    addVersionLink(fragment, baseUrl, 'latest');
+
     var releases = json && json.releases ? Object.keys(json.releases) : []
     releases.sort().reverse().forEach(function(version) {
       // versions older than 2.3.1 don't have documentation
       if (version > '2.3.1') {
-        addVersionLink(fragment, version);
+        addVersionLink(fragment, baseUrl, version);
       }
     });
   }
