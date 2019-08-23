@@ -44,12 +44,28 @@
     addVersionLink(fragment, baseUrl, 'latest');
 
     var releases = json && json.releases ? Object.keys(json.releases) : []
-    releases.sort().reverse().forEach(function(version) {
-      // versions older than 2.3.1 don't have documentation
-      if (version > '2.3.1') {
+    releases
+      // versions older than 2.3.1 don't have documentation - ignore them
+      .filter(function(x){
+        return semver(x) > semver('2.3.1');
+      })
+      // most recent version first
+      .sort(function(x, y){
+        return semver(x) < semver(y);
+      })
+      .forEach(function(version) {
         addVersionLink(fragment, baseUrl, version);
-      }
-    });
+      });
+  }
+
+  // Poor-man's Semver. This will work fine until we have five digits in a
+  // single component of the version number, which seems unlikely to ever happen.
+  //
+  // Pad major/minor/patch so that "2.10.1" > "2.3.2"
+  function semver(version) {
+    return version.split(".").map(function(v) {
+      return Number(v) + 10000;
+    })
   }
 
   function returnJSON(response) {
@@ -72,4 +88,5 @@
   fetch('https://pypi.org/pypi/blackfynn/json')
     .then(returnJSON)
     .then(handleSuccess);
+
 </script>
